@@ -1,4 +1,4 @@
 package com.example.aemetiempo.Controller;
 
-public class Controller {
+public class MainController {
 }
