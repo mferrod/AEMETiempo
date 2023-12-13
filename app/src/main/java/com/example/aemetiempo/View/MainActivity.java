@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.aemetiempo.Controller.MainController;
 import com.example.aemetiempo.Model.Localidad;
@@ -72,7 +73,14 @@ public class MainActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+                int list = 0;
+                ArrayList<Localidad> local = MainController.getSingleton().getLocalidades(
+                        String.valueOf(editText.getText()), arroncsv);
+                while (!local.get(list).getNombreLocalidad().equals(spinner.getSelectedItem().toString()))
+                    list++;
+                MainController.getSingleton().getDataFromAEMET(
+                        local.get(list).getCprovincia() +
+                        local.get(list).getCodmunicipio());
             }
 
             @Override
@@ -80,5 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
         });
+    }
+    public void setError(String error) {
+        TextView tv = findViewById(R.id.tvResults);
+        tv.setText(error);
     }
 }

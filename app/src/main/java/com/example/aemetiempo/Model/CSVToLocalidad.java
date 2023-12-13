@@ -22,7 +22,7 @@ public class CSVToLocalidad {
     public ArrayList<Localidad> obtainLocalidadesFromCSV() {
         ArrayList<Localidad> localidades = new ArrayList<>();
             int i = 0;
-            while (i < 3) {
+            while (i < localidadesencsv.length) {
                 String str = localidadesencsv[i];
                 String[] klm;
                 klm = str.split(";");
