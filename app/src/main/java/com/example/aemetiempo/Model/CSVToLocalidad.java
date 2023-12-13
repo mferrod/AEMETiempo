@@ -1,5 +1,7 @@
 package com.example.aemetiempo.Model;
 
+import com.example.aemetiempo.R;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,29 +13,22 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CSVToLocalidad {
-    private BufferedReader bufferedReader;
+    private final String[] localidadesencsv;
 
-    public CSVToLocalidad(String fileLocation) {
-        try {
-            bufferedReader = new BufferedReader(new FileReader("res\\assets\\20comun.csv"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    public CSVToLocalidad(String[] localidadesencsv) {
+        this.localidadesencsv = localidadesencsv;
     }
 
     public ArrayList<Localidad> obtainLocalidadesFromCSV() {
         ArrayList<Localidad> localidades = new ArrayList<>();
-            try {
-                String str = null;
-                String[] 
-                while ((str = bufferedReader.readLine()) != null) {
-                    str.split(";");
-                    localidades.add(new Localidad());
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            int i = 0;
+            while (i < 3) {
+                String str = localidadesencsv[i];
+                String[] klm;
+                klm = str.split(";");
+                localidades.add(new Localidad(klm[0], klm[1], klm[2], klm[3], klm[4]));
+                i++;
             }
-            return localidades;
-        }
+        return localidades;
     }
 }

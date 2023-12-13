@@ -52,4 +52,13 @@
         <item>Zamora</item>
         <item>Zarazgoza</item>
     </string-array>
+    <string-array name="localidadescsveadas">
+        <item>01;23;028;1;Cazorla</item>
+        <item>01;23;028;1;Cazorleta</item>
+        <item>01;23;028;1;Cazorleja</item>
+        <item>01;23;028;1;Cazorlita</item>
+        <item>01;23;045;2;Huesa</item>
+        <item>01;23;050;3;Jaén</item>
+        <item>01;23;024;3;Carolina, La</item>
+    </string-array>
 </resources>
