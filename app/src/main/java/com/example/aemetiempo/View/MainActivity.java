@@ -90,7 +90,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void setError(String error) {
-        TextView tv = findViewById(R.id.tvResults);
+        TextView tv = (TextView) findViewById(R.id.tvResults);
         tv.setText(error);
+    }
+
+    public void accessToData() {
     }
 }

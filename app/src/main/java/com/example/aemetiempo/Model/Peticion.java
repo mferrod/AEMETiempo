@@ -14,14 +14,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class Peticion {
-    private final String URL = "https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/";
-    private final String API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJpYW5vZmRlenJvZGVyb0BnbWFpbC5jb20iLCJqdGkiOiI5MGE5Mzk4MS04MWJjLTRlZTAtOTgwNy03Zjc5OTQ0OTI3NTQiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTcwMDU5MzY3NiwidXNlcklkIjoiOTBhOTM5ODEtODFiYy00ZWUwLTk4MDctN2Y3OTk0NDkyNzU0Iiwicm9sZSI6IiJ9.8rgI1jhZhZbTjmUa-TOJ0xYv73P_V88dVa6CjcIt8Cc";
+    private String URL = "https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/";
+    private static final String API_KEY = "?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJpYW5vZmRlenJvZGVyb0BnbWFpbC5jb20iLCJqdGkiOiI5MGE5Mzk4MS04MWJjLTRlZTAtOTgwNy03Zjc5OTQ0OTI3NTQiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTcwMDU5MzY3NiwidXNlcklkIjoiOTBhOTM5ODEtODFiYy00ZWUwLTk4MDctN2Y3OTk0NDkyNzU0Iiwicm9sZSI6IiJ9.8rgI1jhZhZbTjmUa-TOJ0xYv73P_V88dVa6CjcIt8Cc";
     public void requestDataURL(String code) {
         OkHttpClient cliente = new OkHttpClient();
-
+        URL = URL + code;
         //construimos la peticion
         Request peticion = new Request.Builder()
-                .url(URL+code+API_KEY)
+                .url(URL+API_KEY)
                 .get()
                 .addHeader("cache-control", "no-cache")
                 .build();
