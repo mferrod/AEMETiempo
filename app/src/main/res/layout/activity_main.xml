@@ -50,6 +50,7 @@
         android:layout_marginBottom="50dp"
         android:ems="10"
         android:inputType="text"
+        android:text="Caz"
         app:layout_constraintBottom_toTopOf="@+id/rvData"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/spinnerSelector"

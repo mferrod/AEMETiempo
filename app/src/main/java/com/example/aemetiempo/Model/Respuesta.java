@@ -17,7 +17,7 @@ public class Respuesta {
         LinkedList<Tiempo> data = new LinkedList<>();
 
         JsonElement jsonElement = JsonParser.parseString(this.datosJson);
-        JsonObject jsonObject = jsonElement.getAsJsonObject().get("prediccion").getAsJsonObject();
+        JsonObject jsonObject = jsonElement.getAsJsonArray().getAsJsonObject().get("prediccion").getAsJsonObject();
         return data;
     }
 }

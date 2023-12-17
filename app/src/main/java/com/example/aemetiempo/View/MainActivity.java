@@ -1,6 +1,8 @@
 package com.example.aemetiempo.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,14 +16,22 @@ import android.widget.TextView;
 
 import com.example.aemetiempo.Controller.MainController;
 import com.example.aemetiempo.Model.Localidad;
+import com.example.aemetiempo.Model.TemporalAdapter;
+import com.example.aemetiempo.Model.Tiempo;
 import com.example.aemetiempo.R;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private EditText editText;
     private Spinner spinner;
     private String[] arroncsv;
+    private static MainActivity activity;
+    private RecyclerView mRecyclerView;
+    private TemporalAdapter mAdapter;
+    private LinkedList<Tiempo> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +40,18 @@ public class MainActivity extends AppCompatActivity {
         this.varDeclarations();
         this.editTextLook();
         this.spinnerMaker();
+        MainActivity.activity = this;
+        MainController.setActivity(this);
     }
     private void varDeclarations() {
         editText = findViewById(R.id.etLocalidad);
         spinner = findViewById(R.id.spinnerSelector);
         arroncsv = getResources().getStringArray(R.array.localidadescsveadas);
+        mList = new LinkedList<>();
+        mRecyclerView = findViewById(R.id.rvData);
+        mAdapter = new TemporalAdapter(this, mList);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void editTextLook() {
@@ -47,8 +64,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //Con esto busco coincidencias -- POR DESARROLLAR
-                spinner.setAdapter(null); //Elimino todos los datos que haya?
-                spinnerAddOptions();
+                if (i > 2) {
+                    spinner.setAdapter(null); //Elimino todos los datos que haya?
+                    spinnerAddOptions();
+                }
             }
 
             @Override
@@ -58,24 +77,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void spinnerAddOptions() {
-        if (!(editText.getText().equals(""))) {
-            ArrayList<Localidad> local = MainController.getSingleton().getLocalidades(
-                    String.valueOf(editText.getText()), arroncsv);
-            String[] localnames = new String[local.size()];
-            for (int i = 0; i < local.size(); i++)
-                localnames[i] = local.get(i).getNombreLocalidad();
-            ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, localnames);
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            this.spinner.setAdapter(arrayAdapter);
-        }
+        MainController.getSingleton().getLocalidades(
+                String.valueOf(editText.getText()), arroncsv);
+        ArrayList<Localidad> local = MainController.getSingleton().getLocalidadesSeleccionadas();
+        String[] localnames = new String[local.size()];
+        for (int i = 0; i < local.size(); i++)
+            localnames[i] = local.get(i).getNombreLocalidad();
+        ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, localnames);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.spinner.setAdapter(arrayAdapter);
     }
     private void spinnerMaker() {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 int list = 0;
-                ArrayList<Localidad> local = MainController.getSingleton().getLocalidades(
-                        String.valueOf(editText.getText()), arroncsv);
+                ArrayList<Localidad> local = MainController.getSingleton().getLocalidadesSeleccionadas();
                 while (!local.get(list).getNombreLocalidad().equals(spinner.getSelectedItem().toString()))
                     list++;
                 MainController.getSingleton().getDataFromAEMET(
@@ -90,10 +107,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void setError(String error) {
-        TextView tv = (TextView) findViewById(R.id.tvResults);
+        TextView tv = findViewById(R.id.tvResults);
         tv.setText(error);
     }
 
     public void accessToData() {
+        //Get data from servers throgh controller-model classes
+        List<Tiempo> nuevaLista = MainController.getSingleton().dameDatosTiempo();
+
+        //Put data in adapter
+        mList.clear();
+        for (Tiempo item:nuevaLista) {
+            mList.add(item);
+        }
+        mAdapter.notifyDataSetChanged();
     }
 }

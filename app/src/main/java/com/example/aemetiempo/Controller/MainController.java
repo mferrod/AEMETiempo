@@ -16,6 +16,8 @@ public class MainController {
     private final String API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJpYW5vZmRlenJvZGVyb0BnbWFpbC5jb20iLCJqdGkiOiI5MGE5Mzk4MS04MWJjLTRlZTAtOTgwNy03Zjc5OTQ0OTI3NTQiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTcwMDU5MzY3NiwidXNlcklkIjoiOTBhOTM5ODEtODFiYy00ZWUwLTk4MDctN2Y3OTk0NDkyNzU0Iiwicm9sZSI6IiJ9.8rgI1jhZhZbTjmUa-TOJ0xYv73P_V88dVa6CjcIt8Cc";
     private static MainController mySingleController;
     private static MainActivity mainActivity;
+    private final ArrayList<Localidad> localidadesSeleccionadas = new ArrayList<>();
+
     private List<Tiempo> tiempoData;
     private MainController() {
         tiempoData = new LinkedList<>();
@@ -26,21 +28,14 @@ public class MainController {
             mySingleController = new MainController();
         return mySingleController;
     }
-    public ArrayList<Localidad> getLocalidades(String textoParecido, String[] localidadescsv) {
-        boolean igual = false;
+    public void getLocalidades(String textoParecido, String[] localidadescsv) {
         CSVToLocalidad n = new CSVToLocalidad(localidadescsv);
         ArrayList<Localidad> x = n.obtainLocalidadesFromCSV();
-        ArrayList<Localidad> ret = new ArrayList<>();
         for (int i = 0; i < x.size(); i++) {
             String s = x.get(i).getNombreLocalidad().substring(0, textoParecido.length());
             if (s.equals(textoParecido))
-                igual = true;
-            if (igual) {
-                ret.add(x.get(i));
-                igual = false;
-            }
+                localidadesSeleccionadas.add(x.get(i));
         }
-        return (ret);
     }
     public void getDataFromAEMET(String code) {
         Peticion p = new Peticion();
@@ -56,7 +51,7 @@ public class MainController {
         Respuesta respuesta = new Respuesta(aemetres);
         tiempoData = respuesta.getData();
 
-        MainController.mainActivity.accessToData();
+        //MainController.mainActivity.accessToData();
     }
     public void setErrorFromAEMET(String aemetres) {
         MainController.mainActivity.setError(aemetres); //Mando el error al Activity
@@ -64,4 +59,16 @@ public class MainController {
     public List<Tiempo> dameDatosTiempo() {
         return this.tiempoData;
     }
+
+    public ArrayList<Localidad> getLocalidadesSeleccionadas() {
+        if (localidadesSeleccionadas == null)
+            return new ArrayList<>();
+        return localidadesSeleccionadas;
+    }
+
+    public static void setActivity(MainActivity myActi) {
+        mainActivity = myActi;
+    }
+
+
 }
