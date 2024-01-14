@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="#0090FF"
+    android:orientation="horizontal"
+    android:padding="15dp">
 
     <ImageView
         android:id="@+id/imagenTiempo"
@@ -24,7 +27,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="21dp"
-        android:background="#FFFFFF"
+        android:background="#0090FF"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -41,6 +44,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="33dp"
         android:text="TextView"
+        android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/tvMinima"
         app:layout_constraintStart_toEndOf="@+id/tvDia"
@@ -52,9 +56,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="TextView"
+        android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/imagenTiempo"
         app:layout_constraintStart_toEndOf="@+id/tvMaxima"
         app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
