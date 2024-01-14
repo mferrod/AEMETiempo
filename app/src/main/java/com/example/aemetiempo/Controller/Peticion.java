@@ -1,4 +1,4 @@
-package com.example.aemetiempo.Model;
+package com.example.aemetiempo.Controller;
 
 import android.os.Handler;
 import android.os.Looper;

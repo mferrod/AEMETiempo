@@ -5,6 +5,12 @@ public class Tiempo {
     private String maxima;
     private String minima;
 
+    public Tiempo(String diaSemana, String maxima, String minima) {
+        this.diaSemana = diaSemana;
+        this.maxima = maxima;
+        this.minima = minima;
+    }
+
     public String getDiaSemana() {
         return diaSemana;
     }
@@ -15,17 +21,5 @@ public class Tiempo {
 
     public String getMinima() {
         return minima;
-    }
-
-    public void setDiaSemana(String diaSemana) {
-        this.diaSemana = diaSemana;
-    }
-
-    public void setMaxima(String maxima) {
-        this.maxima = maxima;
-    }
-
-    public void setMinima(String minima) {
-        this.minima = minima;
     }
 }

@@ -1,7 +1,10 @@
 package com.example.aemetiempo.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,14 +17,22 @@ import android.widget.TextView;
 
 import com.example.aemetiempo.Controller.MainController;
 import com.example.aemetiempo.Model.Localidad;
+import com.example.aemetiempo.Controller.TemporalAdapter;
+import com.example.aemetiempo.Model.Tiempo;
 import com.example.aemetiempo.R;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private EditText editText;
     private Spinner spinner;
     private String[] arroncsv;
+    private static MainActivity activity;
+    private RecyclerView mRecyclerView;
+    private TemporalAdapter mAdapter;
+    private LinkedList<Tiempo> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +41,18 @@ public class MainActivity extends AppCompatActivity {
         this.varDeclarations();
         this.editTextLook();
         this.spinnerMaker();
+        MainActivity.activity = this;
+        MainController.setActivity(this);
     }
     private void varDeclarations() {
         editText = findViewById(R.id.etLocalidad);
         spinner = findViewById(R.id.spinnerSelector);
         arroncsv = getResources().getStringArray(R.array.localidadescsveadas);
+        mList = MainController.getSingleton().dameDatosTiempo();
+        mRecyclerView = findViewById(R.id.rvData);
+        mAdapter = new TemporalAdapter(this, mList);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void editTextLook() {
@@ -94,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(error);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void accessToData() {
+        List<Tiempo> nuevaLista = MainController.getSingleton().dameDatosTiempo();
+
+        mList.clear();
+        for (Tiempo item:nuevaLista) {
+            mList.add(item);
+        }
+        mAdapter.notifyDataSetChanged();
     }
 }

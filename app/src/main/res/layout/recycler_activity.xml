@@ -7,58 +7,54 @@
 
     <ImageView
         android:id="@+id/imagenTiempo"
-        android:layout_width="69dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDia"
+        android:layout_width="29dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="71dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvMinima"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvDia"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="#0C7DED"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="21dp"
+        android:background="#FFFFFF"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imagenTiempo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/tvMaxima"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvMaxima"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="170dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="33dp"
         android:text="TextView"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvMinima"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imagenTiempo"
-        app:layout_constraintTop_toBottomOf="@+id/tvDia" />
+        app:layout_constraintEnd_toStartOf="@+id/tvMinima"
+        app:layout_constraintStart_toEndOf="@+id/tvDia"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvMinima"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="170dp"
-        android:layout_marginBottom="629dp"
+        android:layout_marginTop="2dp"
         android:text="TextView"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imagenTiempo"
-        app:layout_constraintTop_toBottomOf="@+id/tvMaxima" />
+        app:layout_constraintEnd_toStartOf="@+id/imagenTiempo"
+        app:layout_constraintStart_toEndOf="@+id/tvMaxima"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
