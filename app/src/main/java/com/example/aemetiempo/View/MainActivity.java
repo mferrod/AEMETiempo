@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.aemetiempo.Controller.MainController;
 import com.example.aemetiempo.Model.Localidad;
@@ -113,14 +114,14 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(error);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     public void accessToData() {
+        TextView tv = (TextView) findViewById(R.id.tvResults);
         List<Tiempo> nuevaLista = MainController.getSingleton().dameDatosTiempo();
-
         mList.clear();
-        for (Tiempo item:nuevaLista) {
-            mList.add(item);
-        }
+        tv.clearComposingText();
+        Toast.makeText(activity, "Datos del tiempo de " + spinner.getSelectedItem().toString() + " cargados", Toast.LENGTH_LONG).show();
+        mList.addAll(nuevaLista);
         mAdapter.notifyDataSetChanged();
     }
 }

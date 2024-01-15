@@ -21,22 +21,26 @@ public class Respuesta {
     public LinkedList<Tiempo> getData() {
         LinkedList<Tiempo> data = new LinkedList<>();
 
-        JsonElement jsonparseao = JsonParser.parseString(this.datosJson);
-        JsonArray jsonArray = jsonparseao.getAsJsonArray();
-        JsonObject miarrayporfin = jsonArray.get(0).getAsJsonObject();
-        JsonElement arrayelement = miarrayporfin.get("prediccion");
-        JsonObject dias = arrayelement.getAsJsonObject();
-        JsonArray precipitaciones = dias.getAsJsonArray("dia");
+        try {
+            JsonElement jsonparseao = JsonParser.parseString(this.datosJson);
+            JsonArray jsonArray = jsonparseao.getAsJsonArray();
+            JsonObject miarrayporfin = jsonArray.get(0).getAsJsonObject();
+            JsonElement arrayelement = miarrayporfin.get("prediccion");
+            JsonObject dias = arrayelement.getAsJsonObject();
+            JsonArray precipitaciones = dias.getAsJsonArray("dia");
 
-        for (int i = 0; i < precipitaciones.size(); i++) {
-            JsonObject basePreciDia = precipitaciones.get(i).getAsJsonObject();
-            JsonPrimitive fechaPreci = basePreciDia.getAsJsonPrimitive("fecha");
-            String fecha = new Fecha(fechaPreci.getAsString()).getDiaSemanaConvertido();
-            JsonElement temp = basePreciDia.getAsJsonObject("temperatura");
-            JsonObject tempOb = temp.getAsJsonObject();
-            String maxima = tempOb.get("maxima").getAsString();
-            String minima = tempOb.get("minima").getAsString();
-            data.add(new Tiempo(fecha, maxima, minima));
+            for (int i = 0; i < precipitaciones.size(); i++) {
+                JsonObject basePrecioDia = precipitaciones.get(i).getAsJsonObject();
+                JsonPrimitive fechaPrecio = basePrecioDia.getAsJsonPrimitive("fecha");
+                String fecha = new Fecha(fechaPrecio.getAsString()).getDiaSemanaConvertido();
+                JsonElement temp = basePrecioDia.getAsJsonObject("temperatura");
+                JsonObject tempOb = temp.getAsJsonObject();
+                String maxima = tempOb.get("maxima").getAsString();
+                String minima = tempOb.get("minima").getAsString();
+                data.add(new Tiempo(fecha, maxima, minima));
+            }
+        } catch (IllegalStateException ex) {
+            MainController.getSingleton().setErrorFromAEMET("NO SE HA PODIDO PARSEAR, PORFAVOR, INTÉNTELO MÁS TARDE.");
         }
         return data;
     }
