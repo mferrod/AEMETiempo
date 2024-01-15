@@ -76,9 +76,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void spinnerAddOptions() {
-        if (!(editText.getText().equals(""))) {
+        String editString = editText.getText().toString();
+        if (!(editString.equals(""))) {
             ArrayList<Localidad> local = MainController.getSingleton().getLocalidades(
-                    String.valueOf(editText.getText()), arroncsv);
+                    editString, arroncsv);
             String[] localnames = new String[local.size()];
             for (int i = 0; i < local.size(); i++)
                 localnames[i] = local.get(i).getNombreLocalidad();
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 int list = 0;
                 ArrayList<Localidad> local = MainController.getSingleton().getLocalidades(
-                        String.valueOf(editText.getText()), arroncsv);
+                        editText.getText().toString(), arroncsv);
                 while (!local.get(list).getNombreLocalidad().equals(spinner.getSelectedItem().toString()))
                     list++;
                 MainController.getSingleton().getDataFromAEMET(
