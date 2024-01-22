@@ -26,18 +26,13 @@ public class MainController {
         return mySingleController;
     }
     public ArrayList<Localidad> getLocalidades(String textoParecido, String[] localidadescsv) {
-        boolean igual = false;
         CSVToLocalidad n = new CSVToLocalidad(localidadescsv);
         ArrayList<Localidad> x = n.obtainLocalidadesFromCSV();
         ArrayList<Localidad> ret = new ArrayList<>();
         for (int i = 0; i < x.size(); i++) {
             String s = x.get(i).getNombreLocalidad().substring(0, textoParecido.length());
             if (s.equals(textoParecido))
-                igual = true;
-            if (igual) {
                 ret.add(x.get(i));
-                igual = false;
-            }
         }
         return (ret);
     }

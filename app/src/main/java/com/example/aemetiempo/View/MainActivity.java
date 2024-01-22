@@ -77,17 +77,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void spinnerAddOptions() {
-        String editString = editText.getText().toString();
-        if (!(editString.equals(""))) {
-            ArrayList<Localidad> local = MainController.getSingleton().getLocalidades(
-                    editString, arroncsv);
-            String[] localnames = new String[local.size()];
-            for (int i = 0; i < local.size(); i++)
-                localnames[i] = local.get(i).getNombreLocalidad();
-            ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, localnames);
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            this.spinner.setAdapter(arrayAdapter);
-        }
+        String editString = this.editText.getText().toString();
+        if (editString.equals(""))
+            return;
+        ArrayList<Localidad> local = MainController.getSingleton().getLocalidades(
+                editString, this.arroncsv);
+        String[] localnames = new String[local.size()];
+        for (int i = 0; i < local.size(); i++)
+            localnames[i] = local.get(i).getNombreLocalidad();
+        ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, localnames);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.spinner.setAdapter(arrayAdapter);
     }
     private void spinnerMaker() {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -110,8 +110,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void setError(String error) {
-        TextView tv = (TextView) findViewById(R.id.tvResults);
-        tv.setText(error);
+        Toast.makeText(activity, error, Toast.LENGTH_LONG).show();
     }
 
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
