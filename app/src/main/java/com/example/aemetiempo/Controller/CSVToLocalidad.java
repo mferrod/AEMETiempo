@@ -1,4 +1,6 @@
-package com.example.aemetiempo.Model;
+package com.example.aemetiempo.Controller;
+
+import com.example.aemetiempo.Model.Localidad;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,5 @@
 package com.example.aemetiempo.Controller;
 
-import com.example.aemetiempo.Model.CSVToLocalidad;
 import com.example.aemetiempo.Model.Localidad;
 import com.example.aemetiempo.Model.Tiempo;
 import com.example.aemetiempo.View.MainActivity;
