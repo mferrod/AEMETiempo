@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AEMETiempo</string>
+    <string name="aemet_mariano">AEMET Mariano</string>
+    <string name="localidad">Localidad</string>
+    <string name="mariano_fernandez_rodero">Mariano Fernández Rodero</string>
     <string-array name="provincias">
         <item>Álava</item>
         <item>Albacete</item>

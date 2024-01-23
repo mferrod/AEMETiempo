@@ -19,11 +19,11 @@
 
         <TextView
             android:id="@+id/tvCabecera"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#2196F3"
-            android:text="AEMET Mariano"
+            android:text="@string/aemet_mariano"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -31,23 +31,30 @@
 
     <TextView
         android:id="@+id/tvLocalidad"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginEnd="177dp"
-        android:text="Localidad"
+        android:text="@string/localidad"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/etLocalidad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+    <Spinner
+        android:id="@+id/spinnerSelector"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/rvData"
+        app:layout_constraintEnd_toStartOf="@+id/etLocalidad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLocalidad" />
+
     <EditText
         android:id="@+id/etLocalidad"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="50dp"
         android:ems="10"
         android:inputType="text"
         android:text=""
@@ -59,45 +66,20 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvData"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLocalidad" />
+        app:layout_constraintTop_toBottomOf="@+id/etLocalidad"
+        app:layout_constraintBottom_toTopOf="@id/textView"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="13dp"
-        android:text="Mariano Fernández Rodero"
+        android:text="@string/mariano_fernandez_rodero"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvData" />
-
-    <Spinner
-        android:id="@+id/spinnerSelector"
-        android:layout_width="200dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/rvData"
-        app:layout_constraintEnd_toStartOf="@+id/etLocalidad"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLocalidad" />
-
-    <TextView
-        android:id="@+id/tvResults"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="41dp"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvData" />
