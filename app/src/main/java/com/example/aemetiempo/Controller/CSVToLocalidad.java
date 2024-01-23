@@ -13,14 +13,11 @@ public class CSVToLocalidad {
 
     public ArrayList<Localidad> obtainLocalidadesFromCSV() {
         ArrayList<Localidad> localidades = new ArrayList<>();
-            int i = 0;
-            while (i < localidadesencsv.length) {
-                String str = localidadesencsv[i];
-                String[] klm;
-                klm = str.split(";");
-                localidades.add(new Localidad(klm[0], klm[1], klm[2], klm[3], klm[4]));
-                i++;
-            }
+        for (String csvEnString : localidadesencsv) {
+            String[] csvParseado;
+            csvParseado = csvEnString.split(";");
+            localidades.add(new Localidad(csvParseado[0],csvParseado[1],csvParseado[2],csvParseado[3],csvParseado[4]));
+        }
         return localidades;
     }
 }

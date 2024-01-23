@@ -110,16 +110,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void setError(String error) {
-        Toast.makeText(activity, error, Toast.LENGTH_LONG).show();
+        Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
     }
 
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     public void accessToData() {
-        TextView tv = (TextView) findViewById(R.id.tvResults);
         List<Tiempo> nuevaLista = MainController.getSingleton().dameDatosTiempo();
         mList.clear();
-        tv.clearComposingText();
-        Toast.makeText(activity, "Datos del tiempo de " + spinner.getSelectedItem().toString() + " cargados", Toast.LENGTH_LONG).show();
+        if (spinner.getSelectedItem() != null)
+            Toast.makeText(activity, "Datos del tiempo de " + spinner.getSelectedItem().toString() + " cargados", Toast.LENGTH_SHORT).show();
         mList.addAll(nuevaLista);
         mAdapter.notifyDataSetChanged();
     }
