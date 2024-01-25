@@ -38,6 +38,7 @@ public class TemporalAdapter extends RecyclerView.Adapter<TemporalViewHolder> {
         holder.setDay(this.mList.get(position).getDiaSemana());
         holder.setMax(this.mList.get(position).getMaxima());
         holder.setMin(this.mList.get(position).getMinima());
+        holder.setIvTiempo(this.mList.get(position).getImage());
     }
     @Override
     public int getItemCount() {

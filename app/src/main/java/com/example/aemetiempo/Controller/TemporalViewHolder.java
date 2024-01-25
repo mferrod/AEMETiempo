@@ -1,6 +1,7 @@
 package com.example.aemetiempo.Controller;
 
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,12 +16,12 @@ public class TemporalViewHolder extends RecyclerView.ViewHolder {
     private TextView tvMax;
     private TextView tvMin;
     private TextView tvDay;
-    //private ImageView ivTiempo;
+    private ImageView ivTiempo;
 
     public TemporalViewHolder(View itemView, TemporalAdapter adapter) {
         super(itemView);
 
-        //ivTiempo = itemView.findViewById(R.id.imagenTiempo);
+        ivTiempo = itemView.findViewById(R.id.imagenTiempo);
         tvDay = itemView.findViewById(R.id.tvDia);
         tvMax = itemView.findViewById(R.id.tvMaxima);
         tvMin = itemView.findViewById(R.id.tvMinima);
@@ -37,5 +38,8 @@ public class TemporalViewHolder extends RecyclerView.ViewHolder {
 
     public void setMin(String data) {
         tvMin.setText(data);
+    }
+    public void setIvTiempo(int drawable) {
+        ivTiempo.setImageResource(drawable);
     }
 }

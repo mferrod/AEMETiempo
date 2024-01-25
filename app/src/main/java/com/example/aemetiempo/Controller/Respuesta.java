@@ -24,20 +24,23 @@ public class Respuesta {
         try {
             JsonElement jsonparseao = JsonParser.parseString(this.datosJson);
             JsonArray jsonArray = jsonparseao.getAsJsonArray();
-            JsonObject miarrayporfin = jsonArray.get(0).getAsJsonObject();
-            JsonElement arrayelement = miarrayporfin.get("prediccion");
-            JsonObject dias = arrayelement.getAsJsonObject();
-            JsonArray precipitaciones = dias.getAsJsonArray("dia");
+            JsonObject arrayPredicciones = jsonArray.get(0).getAsJsonObject();
+            JsonElement predicciones = arrayPredicciones.get("prediccion");
+            JsonObject diasDePredicciones = predicciones.getAsJsonObject();
+            JsonArray precipitaciones = diasDePredicciones.getAsJsonArray("dia");
 
             for (int i = 0; i < precipitaciones.size(); i++) {
                 JsonObject basePrecioDia = precipitaciones.get(i).getAsJsonObject();
                 JsonPrimitive fechaPrecio = basePrecioDia.getAsJsonPrimitive("fecha");
-                String fecha = new Fecha(fechaPrecio.getAsString()).getDiaSemanaConvertido();
-                JsonElement temp = basePrecioDia.getAsJsonObject("temperatura");
-                JsonObject tempOb = temp.getAsJsonObject();
-                String maxima = tempOb.get("maxima").getAsString();
-                String minima = tempOb.get("minima").getAsString();
-                data.add(new Tiempo(fecha, maxima, minima));
+                JsonElement temperatura = basePrecioDia.getAsJsonObject("temperatura");
+                JsonObject temperaturaObject = temperatura.getAsJsonObject();
+                int j = 0;
+                while (basePrecioDia.get("estadoCielo").getAsJsonArray().get(j).getAsJsonObject().get("descripcion").getAsString().equals(""))
+                    j++;
+                data.add(new Tiempo(new Fecha(fechaPrecio.getAsString()).getDiaSemanaConvertido(),
+                        temperaturaObject.get("maxima").getAsString() + "º",
+                        temperaturaObject.get("minima").getAsString() + "º",
+                        basePrecioDia.get("estadoCielo").getAsJsonArray().get(j).getAsJsonObject().get("descripcion").getAsString()));
             }
         } catch (IllegalStateException ex) {
             MainController.getSingleton().setErrorFromAEMET("NO SE HA PODIDO PARSEAR, PORFAVOR, INTÉNTELO MÁS TARDE.");

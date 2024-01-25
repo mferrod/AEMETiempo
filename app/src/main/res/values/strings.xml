@@ -3,6 +3,7 @@
     <string name="aemet_mariano">AEMET Mariano</string>
     <string name="localidad">Localidad</string>
     <string name="mariano_fernandez_rodero">Mariano Fernández Rodero</string>
+    <string name="introduce_tu_localidad">Introduce tu localidad</string>
     <string-array name="provincias">
         <item>Álava</item>
         <item>Albacete</item>
@@ -57,9 +58,6 @@
     </string-array>
     <string-array name="localidadescsveadas">
         <item>01;23;028;1;Cazorla</item>
-        <item>01;23;028;1;Cazorleta</item>
-        <item>01;23;028;1;Cazorleja</item>
-        <item>01;23;028;1;Cazorlita</item>
         <item>01;23;045;2;Huesa</item>
         <item>01;23;050;3;Jaén</item>
         <item>01;23;024;3;Carolina, La</item>
