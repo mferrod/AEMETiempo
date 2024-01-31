@@ -4,6 +4,9 @@ This project is done by a student from IES Politécnico Jesús Marín.
 Mariano Fernández Rodero
 
 # RoadMAP AEMET Mariano
+## Version 0.6.1
+* Añadidas todas las localidades de España.
+
 ## Version 0.6
 * Añadidas imágenes a cada una de las filas del RecyclerView.
 * Editada la clase `Tiempo` para seleccionar el temporal que hacer y devolver el ID del `drawable`.
